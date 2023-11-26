@@ -17,3 +17,4 @@ Simulator is doing circuit initialization process.
 Block Memory Generator CORE Generator module cputest1.uut.mbr_inst.mem.inst.\native_mem_module.blk_mem_gen_v7_3_inst  is using a behavioral model for simulation which will not precisely model memory collision behavior.
 Finished circuit initialization process.
 # exit 0
+# exit 0

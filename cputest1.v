@@ -35,6 +35,8 @@ module cputest1;
 	wire [3:0] MAR;
 	wire [7:0] MBR;
 	wire [7:0] signal;
+	wire [7:0] bus; 
+	wire [7:0] IR;
 	// Instantiate the Unit Under Test (UUT)
 	CPU uut (
 		.clk(clk), 
@@ -44,27 +46,31 @@ module cputest1;
 		.PC(PC), 
 		.MAR(MAR), 
 		.MBR(MBR),
-		.signal(signal)
+		.signal(signal),
+		.bus(bus),.IR(IR)
 	);
 
 	initial begin
 		// Initialize Inputs
 		clk = 0;
-		reset = 1;
-		#10 inst = 0;
+		reset = 0;
+		inst = 0;
 	end
 		
 
 	
 	
-always #10 clk = ~clk;
+always #25 clk = ~clk;
 
 	initial begin
 	inst = 8'b1;
-	#15 reset = 1;
-   #15 reset = 0;
-	#15 inst = 8'b1111_0000;
+	#50 reset = 1; #150;
+   reset = 0; #250;
+	reset = 1; #50;
+	reset = 0;
+	//#10 reset = 1;
 	end
 
 endmodule
 
+//inncreasing the clk is not helping!

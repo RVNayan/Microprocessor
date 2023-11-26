@@ -34,6 +34,7 @@ module controller(
 	 output reg inc_PC,
     output reg en,
     input reset
+	 //input [4:0] counter
     );
 
   reg [3:0] state;
@@ -49,7 +50,7 @@ module controller(
 	 else
       state = nextstate;
 	end
-	always @*
+	always @(posedge clk)
 		begin
 		if (reset == 0)
 		begin
@@ -57,13 +58,13 @@ module controller(
       case (state)
         GET: begin
           //#100;
-          // Set signals for the GET state
+          // Set signals for the GET state (counter should be added MAR and data cannot be loaded at the same time)
           PC_in = 0; PC_out = 1;
           MAR_in = 1; MAR_mramout = 0;
           data_in = 1; data_out = 0;
           dram_in = 0; dram_out = 1;
           IR_in = 0; IR_out = 0;
-			 en = 1;
+			 en = 0;
          // MBR_in = 0; // Added MBR_in
           Y_in = 0;
           nextstate = FETCH;
@@ -112,6 +113,7 @@ module tb_controller;
 
   reg clk;
   reg reset;
+ // reg [4:0] counter;
   wire PC_in, PC_out, IR_in, IR_out, data_in, data_out, MAR_in, MAR_mramout, dram_in, dram_out, Y_in, inc_PC, en;
  controller uut (
     .clk(clk),
@@ -129,22 +131,28 @@ module tb_controller;
     .inc_PC(inc_PC),
     .en(en),
     .reset(reset)
+	 //.counter(counter)
   );
 
   // Clock generation
   initial begin
     clk = 0;
 	 reset = 0;
+	 //counter = 0;
     forever #5 clk = ~clk;
   end
   
   initial begin
+  // #10 counter = 5'b01000;
 	#10 reset = 1;
 	#50 reset = 0;
+  // #10 counter =  5'b11000;
 	end
   
 endmodule
 
 //wea must be initailized - done
-//MBR is working properly, try working with the complete one (error in assignment)
-//databus added must be tinkered
+//MBR is working properly, Instructions should be given only after completing the get-fetch-decode cycle 
+//...otherwise latest instuction is taken in
+
+//everything is fine except MBR! problem with the timings of the controller

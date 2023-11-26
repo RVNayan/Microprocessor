@@ -14,8 +14,8 @@ Analyzing Verilog file "/home/ise/coa/mcp3/cputest1.v" into library work
 Analyzing Verilog file "/opt/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v" into library work
 Starting static elaboration
 Completed static elaboration
-Fuse Memory Usage: 96284 KB
-Fuse CPU Usage: 1320 ms
+Fuse Memory Usage: 96292 KB
+Fuse CPU Usage: 470 ms
 Compiling module controller
 Compiling module BLK_MEM_GEN_V7_3_output_stage(C_...
 Compiling module BLK_MEM_GEN_V7_3_softecc_output_...
@@ -32,6 +32,6 @@ Compiling module glbl
 Time Resolution for simulation is 1ps.
 Compiled 13 Verilog Units
 Built simulation executable /home/ise/coa/mcp3/cputest1_isim_beh.exe
-Fuse Memory Usage: 102740 KB
-Fuse CPU Usage: 1410 ms
-GCC CPU Usage: 2050 ms
+Fuse Memory Usage: 102748 KB
+Fuse CPU Usage: 500 ms
+GCC CPU Usage: 700 ms
